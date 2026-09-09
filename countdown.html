@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Birthday Countdown ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #ffe4ec, #e8d9ff);
+            color: #4b3047;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 25px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .heart {
+            font-size: 45px;
+            animation: heartbeat 1.3s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        h1 {
+            margin: 10px 0;
+            color: #62355a;
+            font-size: 32px;
+        }
+
+        h2 {
+            color: #8d4d80;
+        }
+
+        /* PHOTO */
+        .photo-frame {
+            width: 180px;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 7px solid white;
+            box-shadow: 0 8px 25px rgba(98, 53, 90, 0.25);
+            margin: 15px auto 25px;
+            display: block;
+        }
+
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 42%;
+            transform: scale(1.8);
+        }
+
+        .intro {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* COUNTDOWN */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .box {
+            width: 110px;
+            padding: 18px 10px;
+            background: #f7e8f3;
+            border-radius: 18px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .number {
+            display: block;
+            font-size: 32px;
+            font-weight: bold;
+            color: #62355a;
+        }
+
+        .label {
+            font-size: 13px;
+            color: #76556f;
+            text-transform: uppercase;
+        }
+
+        /* DAILY MESSAGE */
+        .message {
+            margin: 25px 0;
+            padding: 20px;
+            background: #fff3f7;
+            border-radius: 18px;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        /* BIRTHDAY SECTION */
+        .birthday {
+            display: none;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffd6e7, #ead9ff);
+            border-radius: 20px;
+            margin-top: 25px;
+        }
+
+        .birthday h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .birthday-text {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #8b7285;
+        }
+
+        /* CONFETTI */
+        .confetti {
+            position: fixed;
+            top: -10px;
+            font-size: 25px;
+            animation: fall 4s linear forwards;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 500px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                margin: 15px auto;
+                padding: 25px 15px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .photo-frame {
+                width: 160px;
+                height: 160px;
+            }
+
+            .box {
+                width: 85px;
+                padding: 15px 8px;
+            }
+
+            .number {
+                font-size: 25px;
+            }
+
+            .label {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <!-- HEART -->
+        <div class="heart">
+            ❤️
+        </div>
+
+
+        <!-- TITLE -->
+        <h1>
+            Birthday Countdown 🎂
+        </h1>
+
+
+        <!-- PHOTO -->
+        <div class="photo-frame">
+            <img
+                class="photo"
+                src="photos/natesh-photo.jpg"
+                alt="Natesh Kiran"
+            >
+        </div>
+
+
+        <!-- NAME -->
+        <h2>
+            Hey Natesh Kiran! ❤️
+        </h2>
+
+
+        <!-- INTRO -->
+        <p class="intro">
+            Something special is coming... ✨
+            <br>
+            The countdown has officially started!
+        </p>
+
+
+        <!-- COUNTDOWN -->
+        <div class="countdown">
+
+            <div class="box">
+                <span
+                    class="number"
+                    id="days">
+                    00
+                </span>
+
+                <span class="label">
+                    Days
+                </span>
+            </div>
+
+
+            <div class="box">
+                <span
+                    class="number"
+                    id="hours">
+                    00
+                </span>
+
+                <span class="label">
+                    Hours
+                </span>
+            </div>
+
+
+            <div class="box">
+                <span
+                    class="number"
+                    id="minutes">
+                    00
+                </span>
+
+                <span class="label">
+                    Minutes
+                </span>
+            </div>
+
+
+            <div class="box">
+                <span
+                    class="number"
+                    id="seconds">
+                    00
+                </span>
+
+                <span class="label">
+                    Seconds
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- DAILY MESSAGE -->
+        <div
+            class="message"
+            id="message">
+
+            Loading your special message... 💌
+
+        </div>
+
+
+        <!-- BIRTHDAY REVEAL -->
+        <div
+            class="birthday"
+            id="birthday">
+
+            <div style="font-size: 55px;">
+                🎉🎂🎈
+            </div>
+
+
+            <h2>
+                HAPPY BIRTHDAY! ❤️
+            </h2>
+
+
+            <p class="birthday-text">
+
+                Wishing you an amazing birthday
+                filled with happiness, laughter
+                and beautiful memories! ✨
+
+                <br><br>
+
+                May this year bring you lots of
+                happiness, success and wonderful
+                moments. 🥳
+
+                <br><br>
+
+                Have an amazing birthday,
+                Natesh Kiran! 🎂❤️
+
+            </p>
+
+        </div>
+
+
+        <!-- FOOTER -->
+        <div class="footer">
+
+            Made with ❤️ especially for you
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        // ==========================================
+        // BIRTHDAY DATE
+        // ==========================================
+
+        const birthdayDate =
+            new Date(
+                "September 26, 2026 00:00:00"
+            ).getTime();
+
+
+
+        // ==========================================
+        // DAILY MESSAGES
+        // ==========================================
+
+        const messages = [
+
+            "✨ The countdown has begun! Something special is waiting for you.",
+
+            "💌 Another day closer to your special day!",
+
+            "🌸 Keep smiling! Your birthday is getting closer.",
+
+            "🎈 A little reminder: your special day is approaching!",
+
+            "⭐ Every countdown day makes the celebration closer!",
+
+            "🥳 Get ready for a day filled with happiness!",
+
+            "🎂 Your birthday is getting closer!",
+
+            "💖 Sending you lots of good wishes as your birthday approaches.",
+
+            "🎁 Something special is waiting for you!",
+
+            "✨ The big day is almost here!"
+
+        ];
+
+
+
+        // ==========================================
+        // COUNTDOWN
+        // ==========================================
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+
+            const difference =
+                birthdayDate - now;
+
+
+
+            // ======================================
+            // BIRTHDAY HAS ARRIVED
+            // ======================================
+
+            if (difference <= 0) {
+
+                document.getElementById("days")
+                    .innerHTML = "00";
+
+                document.getElementById("hours")
+                    .innerHTML = "00";
+
+                document.getElementById("minutes")
+                    .innerHTML = "00";
+
+                document.getElementById("seconds")
+                    .innerHTML = "00";
+
+
+                document.getElementById("message")
+                    .style.display = "none";
+
+
+                document.getElementById("birthday")
+                    .style.display = "block";
+
+
+                createConfetti();
+
+
+                return;
+            }
+
+
+
+            // ======================================
+            // CALCULATE TIME
+            // ======================================
+
+            const days =
+                Math.floor(
+                    difference /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (difference %
+                        (1000 * 60 * 60 * 24))
+                    /
+                    (1000 * 60 * 60)
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (difference %
+                        (1000 * 60 * 60))
+                    /
+                    (1000 * 60)
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (difference %
+                        (1000 * 60))
+                    /
+                    1000
+                );
+
+
+
+            // ======================================
+            // DISPLAY COUNTDOWN
+            // ======================================
+
+            document.getElementById("days")
+                .innerHTML =
+                String(days).padStart(2, "0");
+
+
+            document.getElementById("hours")
+                .innerHTML =
+                String(hours).padStart(2, "0");
+
+
+            document.getElementById("minutes")
+                .innerHTML =
+                String(minutes).padStart(2, "0");
+
+
+            document.getElementById("seconds")
+                .innerHTML =
+                String(seconds).padStart(2, "0");
+
+
+
+            // ======================================
+            // DAILY MESSAGE
+            // ======================================
+
+            const messageIndex =
+                days % messages.length;
+
+
+            document.getElementById("message")
+                .innerHTML =
+                messages[messageIndex];
+
+        }
+
+
+
+        // ==========================================
+        // CONFETTI
+        // ==========================================
+
+        function createConfetti() {
+
+            const symbols = [
+                "🎉",
+                "🎊",
+                "❤️",
+                "🎈",
+                "✨",
+                "🎂"
+            ];
+
+
+            for (
+                let i = 0;
+                i < 40;
+                i++
+            ) {
+
+                const confetti =
+                    document.createElement("div");
+
+
+                confetti.className =
+                    "confetti";
+
+
+                confetti.innerHTML =
+                    symbols[
+                        Math.floor(
+                            Math.random() *
+                            symbols.length
+                        )
+                    ];
+
+
+                confetti.style.left =
+                    Math.random() * 100 +
+                    "vw";
+
+
+                confetti.style.animationDuration =
+                    (Math.random() * 3 + 2) +
+                    "s";
+
+
+                confetti.style.animationDelay =
+                    Math.random() * 2 +
+                    "s";
+
+
+                document.body.appendChild(
+                    confetti
+                );
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // START COUNTDOWN
+        // ==========================================
+
+        updateCountdown();
+
+
+        setInterval(
+            updateCountdown,
+            1000
+        );
+
+    </script>
+
+</body>
+</html>
